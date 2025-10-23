@@ -1,0 +1,822 @@
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                      CODEBOOK
+
+
+            Census of Canada, 2021: individual public use microdata file
+                                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      Census of Canada, 2021: individual public use microdata file      Page i
+
+
+                                      CONTENTS
+
+
+      item                                                                page
+
+      agegrp             Age                                                 1
+      marsth             Marital status (de facto)                           1
+      gender             Gender of person (binary)                           2
+      mob1               Mobility 1: Mobility Status Ã¢â¬â Pla    2
+      mob5               Mobility 5: Mobility Status Ã¢â¬â Pla    2
+      pr1                Mobility 1: Province or territory of residence 1    3
+      pr5                Mobility 5: Province or territory of residence 5    3
+      aboid              Indigenous: Indigenous identity - Detailed          4
+      bfnmemb            Indigenous: Membership in a First Nation or Indi    4
+      regind             Indigenous: Registered or Treaty Indian status      4
+      dpgrsum            Population group                                    5
+      ethder             Ethnic or cultural origin: Derived single and se    5
+      vismin             Visible minority                                    6
+      relig              Religion: Aggregated responses                      7
+      fol                Language: First official language spoken            7
+      hlmosten           Language: Language spoken most often at home - E    8
+      pob                Place of birth of person                            9
+      cip2021_stem_sum   Education: Major field of study, STEM and BHASE    10
+      hdgree             Education: Highest certificate, diploma or degre   10
+      capgn              Income: Net capital gains or losses                10
+      cfinc              Income: Total income of census family for all pe   11
+      totinc             Income: Total income                               11
+      cfsize             Census family size, stored at the person level     12
+      pr                 Province or territory of current residence (2021   12
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file      Page 1
+
+
+      agegrp             Age
+
+           VALUE  LABEL
+               1  0 to 4 years
+               2  5 to 6 years
+               3  7 to 9 years
+               4  10 to 11 years
+               5  12 to 14 years
+               6  15 to 17 years
+               7  18 to 19 years
+               8  20 to 24 years
+               9  25 to 29 years
+              10  30 to 34 years
+              11  35 to 39 years
+              12  40 to 44 years
+              13  45 to 49 years
+              14  50 to 54 years
+              15  55 to 59 years
+              16  60 to 64 years
+              17  65 to 69 years
+              18  70 to 74 years
+              19  75 to 79 years
+              20  80 to 84 years
+              21  85 years and over
+              88  Not available
+
+           Data type: numeric
+           Record/columns: 1/1-2
+
+      ________________________________________________________________________
+
+      marsth             Marital status (de facto)
+
+           VALUE  LABEL
+               1  Never married (not living common law)
+               2  Married
+               3  Living common law
+               4  Separated (not living common law)
+               5  Divorced (not living common law)
+               6  Widowed (not living common law)
+               8  Not available
+
+           Data type: numeric
+           Record/column: 1/4
+
+
+
+
+
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file      Page 2
+
+
+      gender             Gender of person (binary)
+
+           VALUE  LABEL
+               1  Woman+
+               2  Man+
+
+           Data type: numeric
+           Record/column: 1/6
+
+      ________________________________________________________________________
+
+      mob1               Mobility 1: Mobility Status Ã¢â¬â Place of residence 1 year ago (20
+
+           VALUE  LABEL
+               1  Non-movers
+               2  Non-migrants
+               3  Different CSD, same census division
+               4  Different CD, same province
+               5  Interprovincial migrants
+               6  External migrants
+               8  Not available
+               9  Not applicable
+
+           Data type: numeric
+           Record/column: 1/8
+
+      ________________________________________________________________________
+
+      mob5               Mobility 5: Mobility Status Ã¢â¬â Place of residence 5 years ago (2
+
+           VALUE  LABEL
+               1  Non-movers
+               2  Non-migrants
+               3  Different CSD, same census division
+               4  Different CD, same province
+               5  Interprovincial migrants
+               6  External migrants
+               8  Not available
+               9  Not applicable
+
+           Data type: numeric
+           Record/column: 1/10
+
+
+
+
+
+
+
+
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file      Page 3
+
+
+      pr1                Mobility 1: Province or territory of residence 1 year ago (2020)
+
+           VALUE  LABEL
+              10  Newfoundland and Labrador
+              11  Prince Edward Island
+              12  Nova Scotia
+              13  New Brunswick
+              24  Quebec
+              35  Ontario
+              46  Manitoba
+              47  Saskatchewan
+              48  Alberta
+              59  British Columbia
+              70  Northern Canada
+              88  Not available
+              99  Not applicable
+
+           Data type: numeric
+           Record/columns: 1/12-13
+
+      ________________________________________________________________________
+
+      pr5                Mobility 5: Province or territory of residence 5 years ago (2016)
+
+           VALUE  LABEL
+              10  Newfoundland and Labrador
+              11  Prince Edward Island
+              12  Nova Scotia
+              13  New Brunswick
+              24  Quebec
+              35  Ontario
+              46  Manitoba
+              47  Saskatchewan
+              48  Alberta
+              59  British Columbia
+              70  Northern Canada
+              88  Not available
+              99  Not applicable
+
+           Data type: numeric
+           Record/columns: 1/15-16
+
+
+
+
+
+
+
+
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file      Page 4
+
+
+      aboid              Indigenous: Indigenous identity - Detailed
+
+           VALUE  LABEL
+               1  First Nations (North American Indian)
+               2  MÃ©tis
+               3  InukÂ (Inuit)
+               4  Multiple Indigenous responses
+               5  Indigenous responses not included elsewhere
+               6  Non-Indigenous identity
+
+           Data type: numeric
+           Record/column: 1/18
+
+      ________________________________________________________________________
+
+      bfnmemb            Indigenous: Membership in a First Nation or Indian band
+
+           VALUE  LABEL
+               0  Not a member of a First Nation or Indian band
+               1  Member of a First Nation or Indian band
+
+           Data type: numeric
+           Record/column: 1/20
+
+      ________________________________________________________________________
+
+      regind             Indigenous: Registered or Treaty Indian status
+
+           VALUE  LABEL
+               0  Not a Registered or Treaty Indian
+               1  Registered or Treaty Indian
+
+           Data type: numeric
+           Record/column: 1/22
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file      Page 5
+
+
+      dpgrsum            Population group
+
+           VALUE  LABEL
+               1  White
+               2  South Asian
+               3  Chinese
+               4  Black
+               5  Filipino
+               6  Arab
+               7  Latin American
+               8  Southeast Asian
+               9  West Asian
+              10  Korean
+              11  Japanese
+              12  Other population groups, n.i.e.
+              13  Other multiple population groups
+              14  Indigenous peoples
+              88  Not available
+
+           Data type: numeric
+           Record/columns: 1/24-25
+
+      ________________________________________________________________________
+
+      ethder             Ethnic or cultural origin: Derived single and selected multiple e
+
+           Data type: numeric
+           Record/columns: 1/27-28
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file      Page 6
+
+
+      vismin             Visible minority
+
+           VALUE  LABEL
+               1  Not a visible minority
+               2  South Asian
+               3  Chinese
+               4  Black
+               5  Filipino
+               6  Arab
+               7  Latin American
+               8  Southeast Asian
+               9  West Asian
+              10  Korean
+              11  Japanese
+              12  Visible minority, n.i.e.
+              13  Multiple visible minorities
+              88  Not available
+
+           Data type: numeric
+           Record/columns: 1/30-31
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file      Page 7
+
+
+      relig              Religion: Aggregated responses
+
+           VALUE  LABEL
+               1  Buddhist
+               2  Christian, n.o.s.
+               3  Anabaptist
+               4  Anglican
+               5  Baptist
+               6  Catholic
+               7  Christian Orthodox
+               8  Jehovah's Witness
+               9  Latter Day Saints
+              10  Lutheran
+              11  Methodist and Wesleyan (Holiness)
+              12  Pentecostal and other Charismatic
+              13  Presbyterian
+              14  Reformed
+              15  United Church
+              16  Other Christian and Christian-related traditions
+              17  Hindu
+              18  Jewish
+              19  Muslim
+              20  Sikh
+              21  Other religions and spiritual traditions
+              22  No religion and secular perspectives
+              88  Not available
+
+           Data type: numeric
+           Record/columns: 1/33-34
+
+      ________________________________________________________________________
+
+      fol                Language: First official language spoken
+
+           VALUE  LABEL
+               1  English
+               2  French
+               3  English and French
+               4  Neither English nor French
+
+           Data type: numeric
+           Record/column: 1/36
+
+
+
+
+
+
+
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file      Page 8
+
+
+      hlmosten           Language: Language spoken most often at home - English component
+
+           VALUE  LABEL
+               0  False - Respondent did not report English as the language spoken most often at home
+               1  True - Respondent reported English as the language spoken most often at home
+               8  Not available
+
+           Data type: numeric
+           Record/column: 1/38
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file      Page 9
+
+
+      pob                Place of birth of person
+
+           VALUE  LABEL
+               1  Canada
+               2  United States
+               3  Central America
+               4  Jamaica
+               5  Other Caribbean and Bermuda
+               6  South America
+               7  United Kingdom
+               8  Germany
+               9  France
+              10  Other Northern and Western Europe
+              11  Poland
+              12  Other Eastern Europe
+              13  Italy
+              14  Portugal
+              15  Other Southern Europe
+              16  Eastern Africa
+              17  Northern Africa
+              18  Other Africa
+              19  Iran
+              20  Other West Central Asia and the Middle East
+              21  China
+              22  Hong Kong
+              23  South Korea
+              24  Other Eastern Asia
+              25  Philippines
+              26  Viet Nam
+              27  Other Southeast Asia
+              28  India
+              29  Pakistan
+              30  Sri Lanka
+              31  Other Southern Asia
+              32  Oceania and others
+              88  Not available
+
+           Data type: numeric
+           Record/columns: 1/40-41
+
+
+
+
+
+
+
+
+
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file     Page 10
+
+
+      cip2021_stem_sum   Education: Major field of study, STEM and BHASE (non-STEM) groupi
+
+           VALUE  LABEL
+               1  Science and science technology
+               2  Engineering and engineering technology
+               3  Mathematics and computer and information sciences
+               4  Business and administration
+               5  Arts and humanities
+               6  Social and behavioural sciences
+               7  Legal professions and studies
+               8  Health care
+               9  Education and teaching
+              10  Trades, services, natural resources and conservation
+              11  No postsecondary certificate, diploma or degree
+              88  Not available
+              99  Not applicable
+
+           Data type: numeric
+           Record/columns: 1/43-44
+
+      ________________________________________________________________________
+
+      hdgree             Education: Highest certificate, diploma or degree
+
+           VALUE  LABEL
+               1  No certificate, diploma or degree
+               2  High (secondary) school diploma or equivalency certificate
+               3  Non-apprenticeship trades certificate or diploma
+               4  Apprenticeship certificate
+               5  Program of 3 months to less than 1 year (College, CEGEP and other non-university certificates or diplomas)
+               6  Program of 1 to 2 years (College, CEGEP and other non-university certificates or diplomas)
+               7  Program of more than 2 years (College, CEGEP and other non-university certificates or diplomas)
+               8  University certificate or diploma below bachelor level
+               9  Bachelor's degree
+              10  University certificate or diploma above bachelor level
+              11  Degree in medicine, dentistry, veterinary medicine or optometry
+              12  Master's degree
+              13  Earned doctorate
+              88  Not available
+              99  Not applicable
+
+           Data type: numeric
+           Record/columns: 1/46-47
+
+      ________________________________________________________________________
+
+      capgn              Income: Net capital gains or losses
+
+           Data type: numeric
+           Record/columns: 1/49-56
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file     Page 11
+
+
+      cfinc              Income: Total income of census family for all persons
+
+           VALUE  LABEL
+               1  Under $2,000
+               2  $2,000 to $4,999
+               3  $5,000 to $6,999
+               4  $7,000 to $9,999
+               5  $10,000 to $11,999
+               6  $12,000 to $14,999
+               7  $15,000 to $16,999
+               8  $17,000 to $19,999
+               9  $20,000 to $24,999
+              10  $25,000 to $29,999
+              11  $30,000 to $34,999
+              12  $35,000 to $39,999
+              13  $40,000 to $44,999
+              14  $45,000 to $49,999
+              15  $50,000 to $54,999
+              16  $55,000 to $59,999
+              17  $60,000 to $64,999
+              18  $65,000 to $69,999
+              19  $70,000 to $74,999
+              20  $75,000 to $79,999
+              21  $80,000 to $84,999
+              22  $85,000 to $89,999
+              23  $90,000 to $94,999
+              24  $95,000 to $99,999
+              25  $100,000 to $109,999
+              26  $110,000 to $119,999
+              27  $120,000 to $129,999
+              28  $130,000 to $139,999
+              29  $140,000 to $149,999
+              30  $150,000 to $174,999
+              31  $175,000 to $199,999
+              32  $200,000 to $249,999
+              33  $250,000 and over
+              88  Not available
+
+           Data type: numeric
+           Record/columns: 1/58-59
+
+      ________________________________________________________________________
+
+      totinc             Income: Total income
+
+           Data type: numeric
+           Record/columns: 1/61-68
+
+
+
+
+
+                                  October 21, 2025
+
+
+
+      Census of Canada, 2021: individual public use microdata file     Page 12
+
+
+      cfsize             Census family size, stored at the person level
+
+           VALUE  LABEL
+               1  Person not in a census family
+               2  2 persons
+               3  3 persons
+               4  4 persons
+               5  5 persons
+               6  6 persons
+               7  7 persons or more
+               8  Not available
+
+           Data type: numeric
+           Record/column: 1/70
+
+      ________________________________________________________________________
+
+      pr                 Province or territory of current residence (2021)
+
+           VALUE  LABEL
+              10  Newfoundland and Labrador
+              11  Prince Edward Island
+              12  Nova Scotia
+              13  New Brunswick
+              24  Quebec
+              35  Ontario
+              46  Manitoba
+              47  Saskatchewan
+              48  Alberta
+              59  British Columbia
+              70  Northern Canada
+
+           Data type: numeric
+           Record/columns: 1/72-73
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                  October 21, 2025
