@@ -68,7 +68,7 @@ As a small team (of size 1-4) you will work through the following steps:
 
 1.  Load in the sample/survey data (CES data).
 2.  Build a model on the sample data. Note: any model is acceptable, but some justification (either practical or statistical) should be given.
-3.  Load in the census data (GSS data).
+3.  Load in the census data (Canadian Census data).
 4.  Calculate $\hat{y}^{PS}$.
 
 ### Canadian Census - Census Data

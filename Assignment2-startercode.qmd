@@ -37,7 +37,7 @@ census_data <- read_csv("canada_census2021.csv")
 
 ```
 
-Type here a summary of the cleaning process (**only add in stuff beyond my original gss_cleaning.R code**). You only need to describe additional cleaning that you and your group did.
+Type here a summary of the cleaning process. You only need to describe cleaning that you and your group did.
 
 ```{r, include = FALSE}
 
