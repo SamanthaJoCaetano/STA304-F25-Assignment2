@@ -73,7 +73,7 @@ As a small team (of size 1-4) you will work through the following steps:
 
 ### Canadian Census - Census Data
 
-The Canadian Census is collected by Statistics Canada every 5 years. The last collection unit was in 2021. Please note that this data is only for University of Toronto users, this data is \*not\* to be shared publicly. So do not post this on any public websites. A .csv file of the data and a codebook are provided.
+The Canadian Census is collected by Statistics Canada every 5 years. The last collection unit was in 2021. Please note that this data is only for University of Toronto users, this data is \*not\* to be shared publicly. The data is available on Quercus only, you will need to download it from quercus and add it to the files that you are working in (either locally or on Jupyterhub). Do not post the census data on any public websites. A .csv file of the data and a codebook are provided only through Quercus.
 
 ### Canadian Election Study - Survey Data
 
