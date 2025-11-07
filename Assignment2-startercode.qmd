@@ -58,13 +58,128 @@ survey_data <-
   survey_data %>% 
   mutate(age = cps21_age,
          prov = cps21_province,
+         gender = cps21_genderid,
+         edu = cps21_education,
          vote_liberal = ifelse(cps21_votechoice==1, 1, 0)) %>% 
-  select(age, prov, vote_liberal)
+  select(age, prov, gender, edu, vote_liberal) %>%
+  
+  mutate(
+    age = case_when(
+      age >= 18 & age <= 19 ~ 7,
+      age >= 20 & age <= 24 ~ 8,
+      age >= 25 & age <= 29 ~ 9,
+      age >= 30 & age <= 34 ~ 10,
+      age >= 35 & age <= 39 ~ 11,
+      age >= 40 & age <= 44 ~ 12,
+      age >= 45 & age <= 49 ~ 13,
+      age >= 50 & age <= 54 ~ 14,
+      age >= 55 & age <= 59 ~ 15,
+      age >= 60 & age <= 64 ~ 16,
+      age >= 65 & age <= 69 ~ 17,
+      age >= 70 & age <= 74 ~ 18,
+      age >= 75 & age <= 79 ~ 19,
+      age >= 80 & age <= 84 ~ 20,
+      age >= 85 ~ 21,
+      TRUE ~ NA_real_
+      ),
+    
+    prov = recode(prov,
+                  '1' = 48, #AB
+                  '2' = 59, #BC
+                  '3' = 46, #MB
+                  '4' = 13, #NB
+                  '5' = 10, #NL
+                  '6' = 70, #North West T --> North
+                  '7' = 12, #NS
+                  '8' = 70, #Nunavut --> North
+                  '9' = 35, #ON
+                  '10' = 11, #PEI
+                  '11' = 24, #QB
+                  '12' = 47, #SK
+                  '13' = 70 #Yukon --> North
+                  ),
+    
+    gender = case_when(
+      gender == 1 ~ 2, #Man
+      gender == 2 ~ 1, #Woman
+      gender %in% c(3,4) ~ NA_real_
+    ),
+    
+    edu = case_when(
+      edu %in% c(1, 2) ~ 1, #high skl or less
+      edu %in% c(3, 4, 5, 6, 7, 8) ~ 2, #college/trades
+      edu %in% c(9, 10, 11) ~ 3, #University degree
+      edu == 12 ~ NA_real_
+    )
+  ) %>%
+  drop_na(age, prov, gender, edu, vote_liberal) %>%
+  
+  mutate(
+    age = factor(age,
+                          levels = 7:21,
+                          labels = c("18–19", "20–24", "25–29", "30–34", "35–39",
+                                     "40–44", "45–49", "50–54", "55–59", "60–64",
+                                     "65–69", "70–74", "75–79", "80–84", "85+")),
+    prov = factor(prov,
+                        levels = c(10, 11, 12, 13, 24, 35, 46, 47, 48, 59, 70),
+                        labels = c("NL", "PE", "NS", "NB", "QC", "ON",
+                                   "MB", "SK", "AB", "BC", "North")),
+    gender = factor(gender,
+                          levels = c(1, 2),
+                          labels = c("Woman", "Man")),
+    
+    edu = factor(edu,
+                          levels = c(1, 2, 3),
+                          labels = c("High school or less",
+                                     "College/trades",
+                                     "University degree"))
+  )
+  
+
 
 census_data <- census_data %>% 
-  mutate(age=round(agegrp),
-         prov=pr) %>% ## Note: needs better cleaning (to match survey)
-  select(age, prov)
+  mutate(
+    age = round(agegrp),
+    prov = pr,
+    gender = gender,
+    edu = hdgree
+  ) %>%
+  
+  select(age, prov, gender, edu) %>%
+  
+  mutate(
+    edu = case_when(
+      edu %in% c(1, 2) ~ 1, #high skl or less
+      edu %in% c(3, 4, 5, 6, 7, 8) ~ 2, #college/trades
+      edu %in% c(9, 10, 11, 12, 13) ~ 3,
+      TRUE ~ NA_real_
+      ),
+    
+    age = ifelse(age < 7, NA, age)
+  ) %>%
+  
+  drop_na(age, prov, gender, edu) %>%
+  
+  mutate(
+    gender = factor(gender,
+                          levels = c(1, 2),
+                          labels = c("Woman", "Man")),
+    edu = factor(edu,
+                          levels = c(1, 2, 3),
+                          labels = c("High school or less",
+                                     "College/trades",
+                                     "University degree")),
+    prov = factor(prov,
+                        levels = c(10, 11, 12, 13, 24, 35, 46, 47, 48, 59, 70),
+                        labels = c("NL", "PE", "NS", "NB", "QC", "ON",
+                                   "MB", "SK", "AB", "BC", "North")),
+    age = factor(age,
+                 levels = 7:21,
+                 labels = c("18–19", "20–24", "25–29", "30–34", "35–39",
+                            "40–44", "45–49", "50–54", "55–59", "60–64",
+                            "65–69", "70–74", "75–79", "80–84", "85+"))
+    
+  )
 
 ```
 
@@ -75,6 +190,34 @@ Include a description of the important variables.
 ```{r, include=FALSE}
 
 # Use this to calculate some summary measures. 
+nrow(survey_data)  # total number of respondents
+names(survey_data)
+
+gender_summary <- survey_data %>%
+  count(gender) %>%
+  mutate(percent = n / sum(n) * 100)
+
+print(gender_summary)
+
+agegrp_summary <- survey_data %>%
+  count(agegrp) %>%
+  mutate(percent = n / sum(n) * 100)
+
+print(agegrp_summary)
+
+prov_summary <- survey_data %>%
+  count(prov) %>%
+  mutate(percent = n / sum(n) * 100)
+
+print(prov)
+
+
+
+mean(survey_data$vote_liberal, na.rm = TRUE) #liberal vote proportion
+
+
+
+
 
 ```
 
