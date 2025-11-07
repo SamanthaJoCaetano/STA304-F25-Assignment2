@@ -209,7 +209,7 @@ prov_summary <- survey_data %>%
   count(prov) %>%
   mutate(percent = n / sum(n) * 100)
 
-print(prov)
+print(prov_summary)
 
 
 
