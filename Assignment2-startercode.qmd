@@ -1,6 +1,6 @@
 ---
-title: "Informative Title Name"
-author: "GROUP NUMBER: ADD YOUR NAMES HERE"
+title: "Predicting Canadian Federal Election Results Using Post-Stratification"
+author: "GROUP 51: CAROL XU, ISLA CHEONG, MIA SUNG, VANESSA GABRIELA KWOK"
 date: November 13, 2025
 subtitle: STA304 - Assignment 2
 format: pdf
@@ -15,13 +15,23 @@ library(tidyverse)
 
 # 1 Introduction
 
-Here you should have a few paragraphs of text introducing the problem, getting the reader interested/ready for the rest of the report.
+<!-- Here you should have a few paragraphs of text introducing the problem, getting the reader interested/ready for the rest of the report. -->
 
-Introduce terminology.
+<!-- Introduce terminology. -->
 
-Highlight hypotheses.
+<!-- Highlight hypotheses. -->
 
-Optional: You can also include a description of each section of this report as a last paragraph.
+<!-- Optional: You can also include a description of each section of this report as a last paragraph. -->
+
+This analysis aims to forecast the popular vote for the upcoming Canadian federal election (2029) utilizing survey data from CES2021 along with Canadian Census data from 2021.
+Our emphasis will be on the Liberal, Conservative, and NDP parties, employing regression models integrated with post-stratification to assess the total vote share.
+
+Research question:
+What proportion of the Canadian population is predicted to vote for each major political party based on age and province demographics?
+
+Hypotheses:
+1. Younger voters will be more likely to vote for the NDP and Liberal parties.
+2. Older voters will be more likely to vote for the Conservative Party.
 
 # 2 Data
 
