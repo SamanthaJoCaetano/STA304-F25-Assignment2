@@ -107,8 +107,8 @@ survey_data <-
     
     edu = case_when(
       edu %in% c(1, 2) ~ 1, #high skl or less
-      edu %in% c(3, 4, 5, 6, 7, 8) ~ 2, #college/trades
-      edu %in% c(9, 10, 11) ~ 3, #University degree
+      edu %in% c(3, 4, 5, 6, 7, 8) ~ 2, #completed some college
+      edu %in% c(9, 10, 11) ~ 3, #College degree
       edu == 12 ~ NA_real_
     )
   ) %>%
@@ -131,8 +131,8 @@ survey_data <-
     edu = factor(edu,
                           levels = c(1, 2, 3),
                           labels = c("High school or less",
-                                     "College/trades",
-                                     "University degree"))
+                                     "Completed some college",
+                                     "College degree"))
   )
   
 
@@ -150,8 +150,8 @@ census_data <- census_data %>%
   mutate(
     edu = case_when(
       edu %in% c(1, 2) ~ 1, #high skl or less
-      edu %in% c(3, 4, 5, 6, 7, 8) ~ 2, #college/trades
-      edu %in% c(9, 10, 11, 12, 13) ~ 3,
+      edu %in% c(3, 4, 5, 6, 7, 8) ~ 2, #completed some college
+      edu %in% c(9, 10, 11, 12, 13) ~ 3, #College degree
       TRUE ~ NA_real_
       ),
     
@@ -167,8 +167,8 @@ census_data <- census_data %>%
     edu = factor(edu,
                           levels = c(1, 2, 3),
                           labels = c("High school or less",
-                                     "College/trades",
-                                     "University degree")),
+                                     "Completed some college",
+                                     "College degree")),
     prov = factor(prov,
                         levels = c(10, 11, 12, 13, 24, 35, 46, 47, 48, 59, 70),
                         labels = c("NL", "PEI", "NS", "NB", "QC", "ON",
