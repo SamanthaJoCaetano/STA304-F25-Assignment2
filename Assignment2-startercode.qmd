@@ -29,9 +29,9 @@ Post-stratification allows us to combine survey data, which may be non-represent
 
 Our hypotheses are as follows:
 
-1. Older age groups are more likely to vote for the Conservative Party.
-2. Younger age groups are more likely to vote for the NDP.
-3. Voting preferences vary significantly across provinces.
+1.  Older age groups are more likely to vote for the Conservative Party.
+2.  Younger age groups are more likely to vote for the NDP.
+3.  Voting preferences vary significantly across provinces.
 
 This report is organized into the following sections: Data, Methods, Results, Discussion, Generative AI & Workflow Statement, Ethics Statement, Bibliography, and Appendix.
 
@@ -45,10 +45,7 @@ The information utilized in this analysis originates from two main sources: the 
 
 # Here you can load in and clean the census data (you may need to do the cleaning in a separate R script). 
 
-census_data <- read_csv("canada_census2021.csv") %>%
-  rename_with(tolower) %>%
-  rename(age = agegrp, province = pr) %>%
-  select(age, province, dpgrsum)
+census_data <- read_csv("canada_census2021.csv")
 
 # You may need additional chunks, in case you want to include some of the cleaning output.
 
@@ -63,16 +60,7 @@ We cleaned the survey and census data to ensure that variable names and categori
 # Here you can load in and clean the survey data (you may want to do the cleaning in a separate R script). 
 
 # We can load it in:
-survey_data <- read_csv("ces2021.csv") %>%
-  rename_with(tolower) %>%
-  mutate(
-    age = cps21_age,
-    prov = cps21_province,
-    vote_liberal = ifelse(cps21_votechoice==1, 1, 0),
-    vote_conservative = ifelse(cps21_votechoice==2, 1, 0),
-    vote_ndp = ifelse(cps21_votechoice==3, 1, 0)
-    ) %>%
-  select(age, prov, vote_liberal, vote_conservative, vote_ndp)
+survey_data <- read_csv("ces2021.csv")
 
 ```
 
@@ -88,8 +76,10 @@ survey_data <-
          prov = cps21_province,
          gender = cps21_genderid,
          edu = cps21_education,
-         vote_liberal = ifelse(cps21_votechoice==1, 1, 0)) %>% 
-  select(age, prov, gender, edu, vote_liberal) %>%
+         vote_liberal = if_else(cps21_votechoice == 1, 1, 0),
+         vote_conservative = if_else(cps21_votechoice == 2, 1, 0),
+         vote_ndp = if_else(cps21_votechoice == 3, 1, 0)) %>% 
+  select(age, prov, gender, edu, vote_liberal, vote_conservative, vote_ndp) %>%
   
   mutate(
     age = case_when(
@@ -276,22 +266,31 @@ Figure 1: Proportion of survey respondents intending to vote for the Liberal par
 
 # 3 Methods
 
-Include some text introducing the methodology, maybe restating the problem/goal of this analysis.
+<!-- Include some text introducing the methodology, maybe restating the problem/goal of this analysis. -->
+
+The analysis proceeds in two steps: (1) fitting a regression model to the survey data, and (2) post-stratification using census data.
 
 ## 3.1 Model Specifics
 
-Here you can describe your regression model
+<!-- Here you can describe your regression model -->
 
-I will (incorrectly) be using a linear regression model to model the proportion of voters who will vote for Donald Trump. This is a naive model. I will only be using age, which is recorded as a numeric variable, to model the probability of voting for Donald Trump. The simple linear regression model I am using is:
+<!-- I will (incorrectly) be using a linear regression model to model the proportion of voters who will vote for Donald Trump. This is a naive model. I will only be using age, which is recorded as a numeric variable, to model the probability of voting for Donald Trump. The simple linear regression model I am using is: -->
 
-$$ y = \beta_0+\beta_1  x_{age} + \epsilon$$
+<!-- $$ y = \beta_0+\beta_1  x_{age} + \epsilon$$ -->
 
-Where $y$ represents the .... $\beta_0$ represents....
+<!-- Where $y$ represents the .... $\beta_0$ represents.... -->
+
+We will be using a logistic regression model to model the probability of voting for the Liberal party. The model will include age and province as predictors. The logistic regression model is specified as follows: $$ \text{logit}(P(Y=1)) = \beta_0 + \beta_1 \cdot \text{age} + \beta_2 \cdot \text{prov} $$
+
+Where $Y$ is a binary variable indicating whether a respondent intends to vote for the Liberal party (1 = yes, 0 = no), $\beta_0$ is the intercept, and $\beta_1$, $\beta_2$ are coefficients for age and province, respectively.
 
 ```{r, include=FALSE}
 
 # Creating the Model
 model <- lm(vote_liberal ~ age + prov, data=survey_data)
+liberal_model <- glm(vote_liberal ~ age + prov, data = survey_data, family = binomial)
+conservative_model <- glm(vote_conservative ~ age + prov, data = survey_data, family = binomial)
+ndp_model <- glm(vote_ndp ~ age + prov, data = survey_data, family = binomial)
 
 # Model Results (to Report in Results section)
 # summary(model)
@@ -304,17 +303,25 @@ model <- lm(vote_liberal ~ age + prov, data=survey_data)
 
 ## 3.2 Post-Stratification
 
-Here you should explain the poststratification process
+<!-- Here you should explain the poststratification process -->
 
-In order to estimate the proportion of voters.....
+<!-- In order to estimate the proportion of voters..... -->
 
-To put math/LaTeX inline just use one set of dollar signs. Example: $\hat{y}^{PS}$
+<!-- To put math/LaTeX inline just use one set of dollar signs. Example: $\hat{y}^{PS}$ -->
 
-To put math on its own line use two sets of dollar signs:
+<!-- To put math on its own line use two sets of dollar signs: -->
 
-$$ include.your.mathematical.model.here.if.you.have.some.math.to.show $$
+<!-- $$ include.your.mathematical.model.here.if.you.have.some.math.to.show $$ -->
 
-All analysis for this report was programmed using `R version 4.0.2` \[2\].
+<!-- All analysis for this report was programmed using `R version 4.0.2` \[2\]. -->
+
+To estimate the overall proportion of voters for the Liberal party, we will use the fitted logistic regression model to predict voting probabilities for each demographic cell defined by age and province in the census data. The predicted probabilities will then be weighted by the population counts from the census to obtain the post-stratified estimate.
+
+Post-stratification adjusts the survey predictions to the population distribution. For each combination of age and province: 1. Predict the probability of voting for the Liberal party using the fitted model. 2. Multiply the predicted probability by the number of individuals in that demographic cell from the census data. 3. Sum these weighted predictions across all cells and divide by the total population to get the overall estimate.
+
+$\hat{y}^{PS}$ = $\frac{\sum_{i} P(Y=1 | \text{age}_i, \text{prov}_i) \cdot N_i}{\sum_{i} N_i}$
+
+Where $P(Y=1 | \text{age}_i, \text{prov}_i)$ is the predicted probability of voting for the Liberal party for demographic cell $i$, and $N_i$ is the population count for that cell from the census data.
 
 # 4 Results
 
