@@ -1,5 +1,5 @@
 ---
-title: "Predicting Canadian Federal Election Results Using Post-Stratification"
+title: "Predicting the 2029 Canadian Federal Election Popular Vote Using Post-Stratification"
 author: "GROUP 51: CAROL XU, ISLA CHEONG, MIA SUNG, VANESSA GABRIELA KWOK"
 date: November 13, 2025
 subtitle: STA304 - Assignment 2
@@ -23,38 +23,56 @@ library(tidyverse)
 
 <!-- Optional: You can also include a description of each section of this report as a last paragraph. -->
 
-This analysis aims to forecast the popular vote for the upcoming Canadian federal election (2029) utilizing survey data from CES2021 along with Canadian Census data from 2021.
-Our emphasis will be on the Liberal, Conservative, and NDP parties, employing regression models integrated with post-stratification to assess the total vote share.
+In this report, we aim to predict the overall popular vote in the upcoming Canadian federal election (tentatively 2029) using post-stratification based on survey and census data. The main goal is to determine the percentage of voters backing the major political parties, namely the Liberal, Conservative, and NDP parties.
 
-Research question:
-What proportion of the Canadian population is predicted to vote for each major political party based on age and province demographics?
+Post-stratification allows us to combine survey data, which may be non-representative, with population data from the Canadian Census to produce estimates that reflect the national electorate. Understanding voting patterns by demographic factors such as age and province can provide insights into electoral trends and guide future research.
 
-Hypotheses:
-1. Younger voters will be more likely to vote for the NDP and Liberal parties.
-2. Older voters will be more likely to vote for the Conservative Party.
+Our hypotheses are as follows:
+
+1. Older age groups are more likely to vote for the Conservative Party.
+2. Younger age groups are more likely to vote for the NDP.
+3. Voting preferences vary significantly across provinces.
+
+This report is organized into the following sections: Data, Methods, Results, Discussion, Generative AI & Workflow Statement, Ethics Statement, Bibliography, and Appendix.
 
 # 2 Data
 
-Type here a paragraph introducing the data, its context and as much info about the data collection process that you know.
+<!-- Type here a paragraph introducing the data, its context and as much info about the data collection process that you know. -->
+
+The information utilized in this analysis originates from two main sources: the 2021 Canadian Election Study (CES) survey data and the 2021 Canadian Census data. The CES is a nationally representative survey that gathers data on the voting habits, political views, and demographic traits of Canadian voters. The 2021 Canadian Census offers detailed demographic information on the Canadian populace, crucial for post-stratification.
 
 ```{r, include = FALSE}
 
 # Here you can load in and clean the census data (you may need to do the cleaning in a separate R script). 
 
-census_data <- read_csv("canada_census2021.csv")
+census_data <- read_csv("canada_census2021.csv") %>%
+  rename_with(tolower) %>%
+  rename(age = agegrp, province = pr) %>%
+  select(age, province, dpgrsum)
 
 # You may need additional chunks, in case you want to include some of the cleaning output.
 
 ```
 
-Type here a summary of the cleaning process. You only need to describe cleaning that you and your group did.
+<!-- Type here a summary of the cleaning process. You only need to describe cleaning that you and your group did. -->
+
+We cleaned the survey and census data to ensure that variable names and categories matched, allowing seamless merging and post-stratification. Only the variables age and province were included in the model for simplicity, as these variables are present in both datasets and expected to influence voting behavior.
 
 ```{r, include = FALSE}
 
 # Here you can load in and clean the survey data (you may want to do the cleaning in a separate R script). 
 
 # We can load it in:
-survey_data <- read_csv("ces2021.csv")
+survey_data <- read_csv("ces2021.csv") %>%
+  rename_with(tolower) %>%
+  mutate(
+    age = cps21_age,
+    prov = cps21_province,
+    vote_liberal = ifelse(cps21_votechoice==1, 1, 0),
+    vote_conservative = ifelse(cps21_votechoice==2, 1, 0),
+    vote_ndp = ifelse(cps21_votechoice==3, 1, 0)
+    ) %>%
+  select(age, prov, vote_liberal, vote_conservative, vote_ndp)
 
 ```
 
@@ -236,11 +254,25 @@ Include a description of the numerical summaries. Remember you can use `r` to us
 ```{r, echo = FALSE}
 
 # Use this to create some plots. Should probably describe both the sample and population.
+# Example Plot: Age Distribution in Survey Data
+ggplot(survey_data, aes(x = age)) +
+  geom_bar(fill = "skyblue", color = "black") +
+  labs(title = "Age Distribution in Survey Data",
+       x = "Age Group",
+       y = "Count") +
+  theme_minimal()
 
+# Example Plot: Proportion
+ggplot(survey_data, aes(x = age, fill = factor(vote_liberal))) +
+geom_bar(position = "fill") +
+labs(y = "Proportion Voting Liberal", x = "Age Group", fill = "Vote Liberal") +
+theme_minimal()
 
 ```
 
-Include a clear description of the plot(s). I would recommend one paragraph for each plot.
+<!-- Include a clear description of the plot(s). I would recommend one paragraph for each plot. -->
+
+Figure 1: Proportion of survey respondents intending to vote for the Liberal party across age groups. Similar figures can be produced for other parties.
 
 # 3 Methods
 
