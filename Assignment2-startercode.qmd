@@ -257,16 +257,19 @@ ggplot(survey_data, aes(x = age)) +
 # Example Plot: Proportion
 ggplot(survey_data, aes(x = age, fill = factor(vote_liberal))) +
 geom_bar(position = "fill") +
+scale_fill_discrete(labels=c('Not voted Liberal', 'Voted Liberal')) +
 labs(y = "Proportion Voting Liberal", x = "Age Group", fill = "Vote Liberal") +
 theme(axis.text.x=element_text(size=10, angle=30, hjust=1))
 
 ggplot(survey_data, aes(x = age, fill = factor(vote_conservative))) +
 geom_bar(position = "fill") +
+scale_fill_discrete(labels=c('Not voted Conservative', 'Voted Conservative')) +
 labs(y = "Proportion Voting Conservative", x = "Age Group", fill = "Vote Conservative") +
 theme(axis.text.x=element_text(size=10, angle=30, hjust=1))
 
 ggplot(survey_data, aes(x = age, fill = factor(vote_ndp))) +
 geom_bar(position = "fill") +
+scale_fill_discrete(labels=c('Not voted NDP', 'Voted NDP'))
 labs(y = "Proportion Voting NDP", x = "Age Group", fill = "Vote NDP") +
 theme(axis.text.x=element_text(size=10, angle=30, hjust=1))
 
