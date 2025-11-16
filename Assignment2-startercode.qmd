@@ -232,6 +232,8 @@ print(prov_summary)
 
 
 mean(survey_data$vote_liberal, na.rm = TRUE) #liberal vote proportion
+mean(survey_data$vote_conservative, na.rm = TRUE) #conservative vote proportion
+mean(survey_data$vote_ndp, na.rm = TRUE) #ndp vote proportion
 
 
 
