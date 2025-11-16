@@ -345,8 +345,20 @@ Where $P(Y=1 | \text{age}_i, \text{prov}_i)$ is the predicted probability of vot
 
 ```{r, include=FALSE}
 
+#model <- lm(vote_liberal ~ age + prov, data=survey_data)
+# ensure factor levels match EXACTLY
+survey_data$age_num <- as.numeric(survey_data$age)
+survey_data$prov_num <- as.numeric(survey_data$prov)
+
+census_data$age_num <- as.numeric(census_data$age)
+census_data$prov_num <- as.numeric(census_data$prov)
+
 # Creating the Model
-model <- lm(vote_liberal ~ age + prov, data=survey_data)
+liberal_model <- glm(vote_liberal ~ age_num + prov_num, data = survey_data, family = binomial)
+
+conservative_model <- glm(vote_conservative ~ age_num + prov_num, data = survey_data, family = binomial)
+
+ndp_model <- glm(vote_ndp ~ age_num + prov_num,data = survey_data, family = binomial)
 
 # Model Results (to Report in Results section)
 # summary(model)
@@ -357,18 +369,44 @@ model <- lm(vote_liberal ~ age + prov, data=survey_data)
 ```{r, include=FALSE}
 
 # Here I will perform the post-stratification calculation
-census_data_counts <- census_data %>% 
-  group_by(age, prov) %>% 
-  summarise(n=n())
+#census_data_counts <- census_data %>% 
+#  group_by(age, prov) %>% 
+#  summarise(n=n())
 
-census_data_counts$estimate <-
-  model %>% 
-  predict(newdata = census_data_counts, type="response")
+#census_data_counts$estimate <-
+#  model %>% 
+#  predict(newdata = census_data_counts, type="response")
 
-census_data_counts %>% 
-  ungroup(age) %>% 
-  mutate(liberal_predict_prop = estimate*n) %>%
-  summarise(liberal_predict = sum(liberal_predict_prop)/sum(n))
+#census_data_counts %>% 
+#  ungroup(age) %>% 
+#  mutate(liberal_predict_prop = estimate*n) %>%
+#  summarise(liberal_predict = sum(liberal_predict_prop)/sum(n))
+
+# Build Census Cell Counts
+census_data_counts <- census_data %>%
+group_by(age_num, prov_num) %>%
+summarise(n = n(), .groups = "drop")
+
+# Add predicted probabilities for each party using the logistic models
+census_data_counts <- census_data_counts %>%
+mutate(
+  p_liberal = predict(liberal_model, newdata = census_data_counts, type = "response"),
+  p_con = predict(conservative_model, newdata = census_data_counts, type = "response"),
+  p_ndp = predict(ndp_model, newdata = census_data_counts, type = "response")
+)
+
+# Remove un-estimable cells (clean and proper)
+census_data_counts <- census_data_counts %>% 
+  drop_na(p_liberal, p_con, p_ndp)
+
+# Compute post-stratified national vote share for each party
+poststrat_results <- census_data_counts %>%
+summarise(
+  liberal = sum(p_liberal * n) / sum(n),
+  conservative = sum(p_con * n) / sum(n),
+  ndp = sum(p_ndp * n) / sum(n)
+) 
+
 
 ```
 
@@ -381,7 +419,17 @@ Remember you can use `r` to use inline R code.
 ```{r, echo = FALSE}
 
 # Here you can include some relevant visualizations.
+library(knitr)
 
+results_table <- poststrat_results %>%
+  pivot_longer(everything(),
+               names_to = "Party",
+               values_to = "PredictedShare") %>%
+  mutate(PredictedShare = round(PredictedShare * 100, 1))
+
+kable(results_table,
+      col.names = c("Party", "Predicted Popular Vote (%)"),
+      caption = "Post-stratified predicted national popular vote for each party.")
 
 ```
 
