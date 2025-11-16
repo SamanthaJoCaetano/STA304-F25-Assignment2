@@ -260,6 +260,19 @@ geom_bar(position = "fill") +
 labs(y = "Proportion Voting Liberal", x = "Age Group", fill = "Vote Liberal") +
 theme(axis.text.x=element_text(size=10, angle=30, hjust=1))
 
+ggplot(survey_data, aes(x = age, fill = factor(vote_conservative))) +
+geom_bar(position = "fill") +
+labs(y = "Proportion Voting Conservative", x = "Age Group", fill = "Vote Conservative") +
+theme(axis.text.x=element_text(size=10, angle=30, hjust=1))
+
+ggplot(survey_data, aes(x = age, fill = factor(vote_ndp))) +
+geom_bar(position = "fill") +
+labs(y = "Proportion Voting NDP", x = "Age Group", fill = "Vote NDP") +
+theme(axis.text.x=element_text(size=10, angle=30, hjust=1))
+
+
+
+
 ```
 
 <!-- Include a clear description of the plot(s). I would recommend one paragraph for each plot. -->
