@@ -37,6 +37,8 @@ This report is organized into the following sections: Data, Methods, Results, Di
 
 # 2 Data
 
+## 2.1 Data Description
+
 <!-- Type here a paragraph introducing the data, its context and as much info about the data collection process that you know. -->
 
 The information utilized in this analysis originates from two main sources: the 2021 Canadian Election Study (CES) survey data and the 2021 Canadian Census data. The CES is a nationally representative survey that gathers data on the voting habits, political views, and demographic traits of Canadian voters. The 2021 Canadian Census offers detailed demographic information on the Canadian populace, crucial for post-stratification.
@@ -53,7 +55,9 @@ census_data <- read_csv("canada_census2021.csv")
 
 <!-- Type here a summary of the cleaning process. You only need to describe cleaning that you and your group did. -->
 
-We cleaned the survey and census data to ensure that variable names and categories matched, allowing seamless merging and post-stratification. Only the variables age and province were included in the model for simplicity, as these variables are present in both datasets and expected to influence voting behavior.
+## 2.2 Data Cleaning
+
+To prepare both datasets for analysis, we recoded the CES variables so that they matched the structure and categories used in the Census data. From the CES, we extracted age, province, gender, education, and vote intention, and transformed these into categories consistent with Statistics Canada definitions. Age was grouped into 15 categories (from 18–19 through 85+), province codes were converted to standard provincial identifiers with the three territories combined into a single “North” category, gender was recoded as “Woman” or “Man,” and education was grouped into three levels: high school or less, some college, and a college degree. We also created binary indicators for Liberal, Conservative, and NDP vote intention. The Census dataset was then recoded using the same age groups, province categories, gender labels, and education levels so that each demographic cell aligned with the CES structure. Observations with missing or incompatible values were removed in both datasets. For the modeling stage, we focused on age and province because these variables are consistently measured in both sources, capture meaningful demographic variation in voting behavior, and support a straightforward post-stratification design.
 
 ```{r, include = FALSE}
 
@@ -201,9 +205,13 @@ census_data <- census_data %>%
 
 ```
 
-Remember, you may want to use multiple datasets here, if you do end up using multiple data sets, or merging the data, be sure to describe this in the cleaning process and be sure to discuss important aspects of all the data that you used.
+```{=html}
+<!--Remember, you may want to use multiple datasets here, if you do end up using multiple data sets, or merging the data, be sure to describe this in the cleaning process and be sure to discuss important aspects of all the data that you used.
 
-Include a description of the important variables.
+Include a description of the important variables.-->
+```
+
+## 2.3 Numerical Summaries
 
 ```{r, include=FALSE}
 
@@ -235,13 +243,13 @@ mean(survey_data$vote_liberal, na.rm = TRUE) #liberal vote proportion
 mean(survey_data$vote_conservative, na.rm = TRUE) #conservative vote proportion
 mean(survey_data$vote_ndp, na.rm = TRUE) #ndp vote proportion
 
-
-
-
-
 ```
 
-Include a description of the numerical summaries. Remember you can use `r` to use inline R code.
+<!--Include a description of the numerical summaries. Remember you can use `r` to use inline R code.-->
+
+The age distribution (Figure 1) shows that respondents are most commonly found in the middle age groups, with smaller counts in the youngest (18–19) and oldest (85+) categories. This uneven distribution highlights differences between the survey sample and the broader Canadian population and helps motivate the need for post-stratification later in the analysis.
+
+Figures 2–4 show the proportion of respondents within each age group who reported intending to vote for the Liberal Party, Conservative Party, or NDP. These plots illustrate how support varies across age categories, providing context for why age is included as a predictor in the regression model. Across the full CES sample, approximately 27.2% support the Liberals, 24.8% support the Conservatives, and 18.6% support the NDP. These summary measures help establish the overall partisan composition of the sample before adjusting the estimates using population data.
 
 ```{r, echo = FALSE}
 
