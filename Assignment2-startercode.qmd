@@ -258,7 +258,7 @@ ggplot(survey_data, aes(x = age)) +
 ggplot(survey_data, aes(x = age, fill = factor(vote_liberal))) +
 geom_bar(position = "fill") +
 labs(y = "Proportion Voting Liberal", x = "Age Group", fill = "Vote Liberal") +
-theme_minimal()
+theme(axis.text.x=element_text(size=10, angle=30, hjust=1))
 
 ```
 
