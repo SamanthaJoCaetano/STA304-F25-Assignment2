@@ -23,7 +23,7 @@ library(tidyverse)
 
 <!-- Optional: You can also include a description of each section of this report as a last paragraph. -->
 
-Canadian federal elections are heavily shaped by regional and demographic differences, making it difficult to estimate how national voting outcomes will unfold. In this report, we aim to predict the popular vote—the total percentage of votes received by each party nationwide—for the upcoming Canadian federal election (tentatively 2029). We merge survey answers from the Canadian Election Study (CES 2021) with population data from the 2021 Canadian Census to create a modified estimate of nationwide voting tendencies (CES 2021; Statistics Canada, 2021).
+Canadian federal elections are heavily shaped by regional and demographic differences, making it difficult to estimate how national voting outcomes will unfold. In this report, we aim to predict the popular vote—the total percentage of votes received by each party nationwide—for the upcoming Canadian federal election (tentatively 2029). We merge survey answers from the Canadian Election Study (Stephenson et al., 2022) with population data from the 2021 Canadian Census to create a modified estimate of nationwide voting tendencies (Stephenson et al., 2022; Statistics Canada & Statistics Canada, 2023).
 
 Being able to predict voting outcomes is very useful as it can highlight the broader political environment, helping researchers and policymakers better understand the views of the voters by providing numerical insights regarding party preferences. Even though Canada selects its government using a first-past-the-post method, trends in the popular vote are extensively covered in media and academic circles, as they indicate national backing for significant political parties and uncover prolonged ideological changes among Canadians.
 
@@ -37,7 +37,9 @@ Prior to conducting our analysis, we hypothesized that: (1) older age groups wil
 
 <!-- Type here a paragraph introducing the data, its context and as much info about the data collection process that you know. -->
 
-```{analysis uses two publicly available datasets: the 2021 Canadian Election Study (CES) and the 2021 Canadian Census. The CES is a nationally distributed survey that collects information on Canadians’ political attitudes, vote intention, and demographic characteristics during federal election cycles. It utilizes sampling and weighting techniques driven by probability to ensure extensive participation from eligible voters across different areas (CES, 2021). The 2021 Census offers comprehensive demographic figures for the Canadian populace and is conducted by Statistics Canada every five years to assess age, gender, education, and geographical distribution (Statistics Canada, 2021). Together, the CES and Census allow us to combine behavioural data (voting intention) with population counts to correct for survey non-representativeness using post-stratification.}
+The analysis uses two publicly available datasets: the 2021 Canadian Election Study (CES) and the 2021 Canadian Census. The CES is a nationally distributed survey that collects information on Canadians’ political attitudes, vote intention, and demographic characteristics during federal election cycles. It utilizes sampling and weighting techniques driven by probability to ensure extensive participation from eligible voters across different areas (Stephenson et al., 2022). The 2021 Census offers comprehensive demographic figures for the Canadian populace and is conducted by Statistics Canada every five years to assess age, gender, education, and geographical distribution (Statistics Canada & Statistics Canada, 2023). Together, the CES and Census allow us to combine behavioural data (voting intention) with population counts to correct for survey non-representativeness using post-stratification.
+
+```{r, include=FALSE}
 
 
 # Here you can load in and clean the census data (you may need to do the cleaning in a separate R script). 
@@ -205,11 +207,11 @@ census_data <- census_data %>%
 
 Include a description of the important variables.-->
 
-The variables used in the post-stratification model and their roles are summarized as follows:
-• Age — demographic predictor strongly linked to political preference trends
-• Province — captures well-established regional differences in Canadian voting patterns
-• Gender — included as a demographic control variable
-• Education — captures socioeconomic status differences that correlate with political behaviour
+The variables used in the post-stratification model and their roles are summarized as follows: 
+• Age — demographic predictor strongly linked to political preference trends 
+• Province — captures well-established regional differences in Canadian voting patterns 
+• Gender — included as a demographic control variable 
+• Education — captures socioeconomic status differences that correlate with political behaviour 
 • Vote intention (Liberal, Conservative, NDP) — outcome variables of interest
 ```
 
@@ -254,7 +256,7 @@ Numerical summaries help illustrate the composition of the CES sample prior to p
 ```{r, echo = FALSE}
 
 # Use this to create some plots. Should probably describe both the sample and population.
-# Example Plot: Age Distribution in Survey Data
+# Figure 1: Age Distribution in Survey Data
 ggplot(survey_data, aes(x = age)) +
   geom_bar(fill = "skyblue", color = "black") +
   labs(title = "Age Distribution in Survey Data",
@@ -263,7 +265,7 @@ ggplot(survey_data, aes(x = age)) +
   theme_minimal() +
   theme(axis.text.x=element_text(size=8, angle=30, hjust=1))
 
-# Example Plot: Proportion
+# Figure 2: Proportion Voting Liberal by Age Group
 ggplot(survey_data, aes(x = age, fill = factor(vote_liberal))) +
 geom_bar(position = "fill") +
 scale_fill_discrete(labels=c('Not voted Liberal', 'Voted Liberal')) +
@@ -271,6 +273,8 @@ labs(y = "Proportion Voting Liberal", x = "Age Group", fill = "Vote Liberal") +
 theme_minimal() +
 theme(axis.text.x=element_text(size=8, angle=30, hjust=1))
 
+
+# Figure 3: Proportion Voting Conservative by Age Group
 ggplot(survey_data, aes(x = age, fill = factor(vote_conservative))) +
 geom_bar(position = "fill") +
 scale_fill_discrete(labels=c('Not voted Conservative', 'Voted Conservative')) +
@@ -278,6 +282,7 @@ labs(y = "Proportion Voting Conservative", x = "Age Group", fill = "Vote Conserv
 theme_minimal() +
 theme(axis.text.x=element_text(size=8, angle=30, hjust=1))
 
+# Figure 4: Proportion Voting NDP by Age Group
 ggplot(survey_data, aes(x = age, fill = factor(vote_ndp))) +
 geom_bar(position = "fill") +
 scale_fill_discrete(labels=c('Not voted NDP', 'Voted NDP')) +
@@ -292,9 +297,9 @@ theme(axis.text.x=element_text(size=8, angle=30, hjust=1))
 
 <!-- Include a clear description of the plot(s). I would recommend one paragraph for each plot. -->
 
-Figure 1 displays the distribution of CES respondents across age categories. The figure shows that majority of the CES respondents were in their late-30s to late-50s compared to young adults and seniors, highlighting the vitality of adjusting estimates based on population data. Figure 2 illustrates the proportion of each age category indicating a desire to vote Liberal. Support peaks among younger and middle-aged respondents before declining in the oldest categories. Figures 3 and 4 show how preference for the Conservative and NDP parties differ amongst age categories; Conservatives are most supported by older age groups, whereas the NDP party is most supported by young respondents. These illustrative visualizations encourage the addition of age and province in the regression model and emphasize the demographic gradients that post-stratification seeks to address.
+Figure 1 displays the distribution of CES respondents across age categories. The figure shows that majority of the CES respondents were in their late-30s to late-60s compared to young adults and seniors, highlighting the vitality of adjusting estimates based on population data. Figure 2 illustrates the proportion of each age category indicating a desire to vote Liberal. Support peaks among younger and middle-aged respondents before declining in the oldest categories. Figures 3 and 4 show how preference for the Conservative and NDP parties differ amongst age categories; Conservatives are most supported by older age groups, whereas the NDP party is most supported by young respondents. These illustrative visualizations encourage the addition of age and province in the regression model and emphasize the demographic gradients that post-stratification seeks to address.
 
-All analysis, such as data cleaning, numerical summaries, and visualization, was conducted utilizing the R programming language (version 4.x) along with the tidyverse and ggplot2 packages for data manipulation and plotting.
+All analysis, such as data cleaning, numerical summaries, and visualization, was conducted utilizing the R programming language (version 4.5.1) along with the tidyverse and ggplot2 packages for data manipulation and plotting.
 
 # 3 Methods
 
@@ -488,7 +493,7 @@ End with a concluding paragraph to wrap up the report.
 
 This report aimed to predict the national popular vote in the upcoming Canadian federal election using logistic regression combined with post-stratification. Our hypotheses included: (1) older demographics are more inclined to support the Conservative Party, (2) younger demographics are more inclined to support the NDP, and (3) voting tendencies differ among provinces. To investigate these hypotheses, we first modeled voting intention for each major party using survey data and demographic predictors (age and province). We subsequently post-stratified the resulting forecasts utilizing census population totals to derive national estimates that represent the demographic makeup of Canada.
 
-The post-stratified results indicated that the predicted national popular vote shares are approximately r results_table$PredictedShare[results_table$Party == "liberal"]% for the Liberal Party, r results_table$PredictedShare[results_table$Party == "conservative"]% for the Conservative Party, and r results_table$PredictedShare[results_table$Party == "ndp"]% for the NDP. These findings suggest a competitive electoral landscape in which no party is projected to win a dominant share of the vote. In broad terms, the results reflect historical voting trends; the Liberal and Conservative parties remain the two major competitors, with the NDP drawing substantial—but comparatively smaller—support nationally.
+The post-stratified results indicated that the predicted national popular vote shares are approximately r results_table$PredictedShare[results_table$Party == "liberal"\]% for the Liberal Party, r results_table$PredictedShare[results_table$Party == "conservative"\]% for the Conservative Party, and r results_table$PredictedShare[results_table$Party == "ndp"\]% for the NDP. These findings suggest a competitive electoral landscape in which no party is projected to win a dominant share of the vote. In broad terms, the results reflect historical voting trends; the Liberal and Conservative parties remain the two major competitors, with the NDP drawing substantial—but comparatively smaller—support nationally.
 
 The demographic patterns implied by the model are consistent with our hypotheses. The logistic regression coefficients (not shown here) indicated that increasing age was associated with higher support for the Conservative Party and lower support for the NDP, while younger respondents demonstrated a stronger likelihood of supporting the NDP. Provincial variation in predicted vote probability also supports the hypothesis that geography plays an important role in political preference. This reinforces the value of incorporating demographic variables when modeling voting intention and highlights the usefulness of post-stratification for correcting demographic imbalance in survey samples.
 
@@ -516,9 +521,9 @@ Since the CES 2021 data is publicly available, describe whether or not this the 
 
 # 8 Bibliography
 
-1.  First reference in a consistent, formal citation style (e.g. APA).
+1.  Stephenson, L. B., Harell, A., Rubenson, D., & Loewen, P. J. (2022). 2021 Canadian Election Study (CES) (Version 3.1, pp. 1615642, 59581151, 361922, 1884147, 225743, 2180672, 2057321, 59190631) \[Application/octet-stream,text/tab-separated-values,application/octet-stream,application/pdf,application/pdf,text/tab-separated-values,application/pdf,text/tab-separated-values\]. Harvard Dataverse. https://doi.org/10.7910/DVN/XBZHKC
 
-2.  Second reference in a consistent, formal citation style (e.g. APA).
+2.  Statistics Canada & Statistics Canada. (2023). 2021 Census of Canada, Age, Household type, Gender, Disability, and Marital Status, by Census Tracts \[custom tabulation\] (Version 1.1, p. 102686142) \[Application/x-beyond2020\]. Borealis. https://doi.org/10.5683/SP3/UHEPKL
 
 3.  Third reference in a consistent, formal citation style (e.g. APA).
 
