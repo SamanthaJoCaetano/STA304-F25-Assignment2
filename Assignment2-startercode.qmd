@@ -430,9 +430,9 @@ census_data_counts <- census_data_counts %>%
 # Compute post-stratified national vote share for each party
 poststrat_results <- census_data_counts %>%
 summarise(
-  liberal = sum(p_liberal * n) / sum(n),
-  conservative = sum(p_con * n) / sum(n),
-  ndp = sum(p_ndp * n) / sum(n)
+  Liberal = sum(p_liberal * n) / sum(n),
+  Conservative = sum(p_con * n) / sum(n),
+  Ndp = sum(p_ndp * n) / sum(n)
 ) 
 
 
