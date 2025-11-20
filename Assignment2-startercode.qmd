@@ -37,11 +37,7 @@ Prior to conducting our analysis, we hypothesized that: (1) older age groups wil
 
 <!-- Type here a paragraph introducing the data, its context and as much info about the data collection process that you know. -->
 
-<<<<<<< HEAD
 The analysis uses two publicly available datasets: the 2021 Canadian Election Study (CES) and the 2021 Canadian Census. The CES is a nationally distributed survey that collects information on Canadians’ political attitudes, vote intention, and demographic characteristics during federal election cycles. It utilizes sampling and weighting techniques driven by probability to ensure extensive participation from eligible voters across different areas (Stephenson et al., 2022). The 2021 Census offers comprehensive demographic figures for the Canadian populace and is conducted by Statistics Canada every five years to assess age, gender, education, and geographical distribution (Statistics Canada & Statistics Canada, 2023). Together, the CES and Census allow us to combine behavioural data (voting intention) with population counts to correct for survey non-representativeness using post-stratification.
-=======
-analysis uses two publicly available datasets: the 2021 Canadian Election Study (CES) and the 2021 Canadian Census. The CES is a nationally distributed survey that collects information on Canadians’ political attitudes, vote intention, and demographic characteristics during federal election cycles. It utilizes sampling and weighting techniques driven by probability to ensure extensive participation from eligible voters across different areas (CES, 2021). The 2021 Census offers comprehensive demographic figures for the Canadian populace and is conducted by Statistics Canada every five years to assess age, gender, education, and geographical distribution (Statistics Canada, 2021). Together, the CES and Census allow us to combine behavioural data (voting intention) with population counts to correct for survey non-representativeness using post-stratification
->>>>>>> 89d1cf93f17067dbb2db3924deee85a378ffa14d
 
 ```{r, include=FALSE}
 
