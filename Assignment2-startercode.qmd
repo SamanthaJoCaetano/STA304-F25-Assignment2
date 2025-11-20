@@ -470,13 +470,6 @@ caption = "Table 1. Post-Stratified Estimates of Popular Vote for Major Canadian
 
 ```
 
-|                                      | Liberal Party | Another Party |
-|--------------------------------------|---------------|---------------|
-| Predicted Percentage of Popular Vote | 0.286         | ??            |
-| Another Statistic?                   | ??            | ??            |
-
-: The proportions of outcome variable of interest calculated for the following political parties: Liberal.
-
 <!-- Include an explanation/interpretation of the visualizations. Make sure to comment on the appropriateness of the assumptions/results. -->
 
 Table 1 presents the post-stratified estimates of the predicted national popular vote for the Liberal Party, Conservative Party, and NDP. These estimates combine the logistic regression predictions with census population totals to approximate how each party would fare if every demographic group voted in proportion to our survey results.
