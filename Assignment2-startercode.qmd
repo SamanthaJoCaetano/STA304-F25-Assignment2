@@ -25,7 +25,7 @@ library(tidyverse)
 
 Strong demographic and regional variations significantly impact Canadian federal elections, which complicates the estimation of voting results relying solely on survey data. This report seeks to forecast the national popular vote—the share of votes received by each party nationwide—for the approaching 2029 federal election. To achieve this, we merge individual-level survey responses from the Canadian Election Study (CES) with population figures from the 2021 Canadian Census to produce nationally representative estimates (Stephenson et al., 2022; Statistics Canada, 2023).
 
-The ability to anticipate voting results is quite beneficial since it can reveal the larger political landscape, aiding researchers and policymakers in grasping voter perspectives through numerical data about party inclinations. Even though Canada selects governments via a first-past-the-post system (Albert, 2024), the popular vote continues to be an important measure in political discourse and scholarly studies as it indicates national backing for significant parties including the Liberal Party, Conservative Party, and New Democratic Party. In this report, popular vote denotes the percentage of all legitimate votes cast across the country for a specific political party, while post-stratification indicates the method of modifying model forecasts to align with the demographic makeup of the population.
+The ability to anticipate voting results is quite beneficial since it can reveal the larger political landscape, aiding researchers and policymakers in grasping voter perspectives through numerical data about party inclinations (Barnfield et al., 2025). Even though Canada selects governments via a first-past-the-post system (Albert, 2024), the popular vote continues to be an important measure in political discourse and scholarly studies as it indicates national backing for significant parties including the Liberal Party, Conservative Party, and New Democratic Party. In this report, popular vote denotes the percentage of all legitimate votes cast across the country for a specific political party, while post-stratification indicates the method of modifying model forecasts to align with the demographic makeup of the population.
 
 The research question guiding this analysis is: What will the popular vote distribution look like for the Liberal, Conservative, and NDP parties in the 2029 Canadian federal election? To answer this, we apply post-stratification to the results of a regression model that estimates how voting intention varies with demographic factors. Age and province are included as predictors because trends from recent elections suggest notable generational and regional cleavages in party support.
 
@@ -541,11 +541,13 @@ The 2021 Canadian Election Study (CES) and 2021 Census data used in this report 
 
 2.  Statistics Canada & Statistics Canada. (2023). 2021 Census of Canada, Age, Household type, Gender, Disability, and Marital Status, by Census Tracts \[custom tabulation\] (Version 1.1, p. 102686142) \[Application/x-beyond2020\]. Borealis. https://doi.org/10.5683/SP3/UHEPKL
 
-3.  Albert, N. (2024, February 11). The First-Past-the-Post Way of Voting is Better-than-the-Rest. C2C Journal. https://c2cjournal.ca/2024/02/the-first-past-the-post-way-of-voting-is-better-than-the-rest/
+3.  Barnfield, M., Phillips, J., Stoeckel, F., Lyons, B., Szewach, P., Thompson, J., Mérola, V., Stöckli, S., & Reifler, J. (2025). The Effects of Forecasts on the Accuracy and Precision of Expectations. Public Opinion Quarterly, 89(1), 185–200. https://doi.org/10.1093/poq/nfaf003 
 
-4.  Fourth reference in a consistent, formal citation style (e.g. APA).
+4.  Albert, N. (2024, February 11). The First-Past-the-Post Way of Voting is Better-than-the-Rest. C2C Journal. https://c2cjournal.ca/2024/02/the-first-past-the-post-way-of-voting-is-better-than-the-rest/
 
-5.  Fifth reference in a consistent, formal citation style (e.g. APA).
+
+5.  OpenAI (2025, November 18). Proofread of poststratification to predict election results report [Generative AI chat]. ChatGPT. URL of the chat
+<!-- add link after -->
 
 # 9 Appendix
 
