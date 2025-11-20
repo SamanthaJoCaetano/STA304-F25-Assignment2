@@ -405,26 +405,13 @@ ndp_model <- glm(
 )
 
 # Model Results (to Report in Results section)
-# summary(model)
-# OR
-# broom::tidy(model)
+summary(liberal_model)
+summary(conservative_model)
+summary(ndp_model)
+
 ```
 
 ```{r, include=FALSE}
-
-# Here I will perform the post-stratification calculation
-#census_data_counts <- census_data %>% 
-#  group_by(age, prov) %>% 
-#  summarise(n=n())
-
-#census_data_counts$estimate <-
-#  model %>% 
-#  predict(newdata = census_data_counts, type="response")
-
-#census_data_counts %>% 
-#  ungroup(age) %>% 
-#  mutate(liberal_predict_prop = estimate*n) %>%
-#  summarise(liberal_predict = sum(liberal_predict_prop)/sum(n))
 
 # Build Census Cell Counts
 census_data_counts <- census_data %>%
@@ -451,14 +438,8 @@ summarise(
   ndp = sum(p_ndp * n) / sum(n)
 ) 
 
-
 ```
 
-Here you present your results. You may want to put them into a well formatted table. Be sure that there is some text describing the results.
-
-Note: Alternatively you can use the `knitr::kable` function to create a well formatted table from your code. See here: <https://rmarkdown.rstudio.com/lesson-7.html>.
-
-Remember you can use `r` to use inline R code.
 
 ```{r, echo = FALSE}
 
