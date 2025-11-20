@@ -535,20 +535,18 @@ To ensure the reproducibility of our analysis, all data cleaning, modeling, and 
 
 The 2021 Canadian Election Study (CES) and 2021 Census data used in this report are publicly accessible and contain no direct identifiers that could reveal the identity of individual participants. Because the data are already anonymized and released for public research purposes, the work conducted in this report does not require Research Ethics Board approval. Our analysis uses only aggregated demographic information and does not attempt to re-identify or make inferences about specific individuals. As such, participant privacy and confidentiality remain fully protected throughout the project.
 
+We excluded non-binary respondents from our gender variable so that it would align with the census data, which categorizes gender as only "Man" and "Woman". Since our project relies on population-level census comparisons, we are limited to using the same binary classification. Non-binary respondents represent less than 1% of our sample, and retaining them would force us to misclassify their gender in the analysis. Excluding them avoids misgendering and ensures that our results are reported in a clear and consistent way with the available population data.
+
 # 8 Bibliography
 
 1.  Stephenson, L. B., Harell, A., Rubenson, D., & Loewen, P. J. (2022). 2021 Canadian Election Study (CES) (Version 3.1, pp. 1615642, 59581151, 361922, 1884147, 225743, 2180672, 2057321, 59190631) \[Application/octet-stream,text/tab-separated-values,application/octet-stream,application/pdf,application/pdf,text/tab-separated-values,application/pdf,text/tab-separated-values\]. Harvard Dataverse. https://doi.org/10.7910/DVN/XBZHKC
 
 2.  Statistics Canada & Statistics Canada. (2023). 2021 Census of Canada, Age, Household type, Gender, Disability, and Marital Status, by Census Tracts \[custom tabulation\] (Version 1.1, p. 102686142) \[Application/x-beyond2020\]. Borealis. https://doi.org/10.5683/SP3/UHEPKL
 
-3.  Barnfield, M., Phillips, J., Stoeckel, F., Lyons, B., Szewach, P., Thompson, J., Mérola, V., Stöckli, S., & Reifler, J. (2025). The Effects of Forecasts on the Accuracy and Precision of Expectations. Public Opinion Quarterly, 89(1), 185–200. https://doi.org/10.1093/poq/nfaf003 
+3.  Barnfield, M., Phillips, J., Stoeckel, F., Lyons, B., Szewach, P., Thompson, J., Mérola, V., Stöckli, S., & Reifler, J. (2025). The Effects of Forecasts on the Accuracy and Precision of Expectations. Public Opinion Quarterly, 89(1), 185–200. https://doi.org/10.1093/poq/nfaf003
 
 4.  Albert, N. (2024, February 11). The First-Past-the-Post Way of Voting is Better-than-the-Rest. C2C Journal. https://c2cjournal.ca/2024/02/the-first-past-the-post-way-of-voting-is-better-than-the-rest/
 
-
-5.  OpenAI (2025, November 18). Proofread of poststratification to predict election results report [Generative AI chat]. ChatGPT. URL of the chat
-<!-- add link after -->
-
-# 9 Appendix
+5.  OpenAI (2025, November 18). Proofread of poststratification to predict election results report \[Generative AI chat\]. ChatGPT. URL of the chat <!-- add link after -->
 
 Any additional notes/derivations that are supplementary to the report can be added in an appendix. This section will not be directly graded, but may be included for completion-sake.
