@@ -509,9 +509,11 @@ In summary, this report shows that integrating logistic regression with post-str
 
 # 6 Generative AI Statement
 
-Here is where you can explain your usage of Generative AI tool(s). Be sure to reference any tools with inline citations.
+<!--Here is where you can explain your usage of Generative AI tool(s). Be sure to reference any tools with inline citations.
 
-Alternatively, if you did not use Generative AI, please include a brief statement outlining your workflow for completing this assignment.
+Alternatively, if you did not use Generative AI, please include a brief statement outlining your workflow for completing this assignment.-->
+
+Generative AI tools were used to support the organization of this report, help improve the clarity of explanations, and refine the overall quality of writing. AI assistance was also used in a limited way to enhance grammar and suggest alternative phrasing. All analysis, results, and interpretations were completed independently by the authors. While AI can improve efficiency and communication, it also has limitations. Its responses may contain inaccuracies or lack the critical judgment required for academic work. To ensure reliability, all AI-assisted content was carefully reviewed, cross-checked with course materials, and revised to reflect the authors’ own understanding.
 
 # 7 Ethics Statement
 
@@ -519,7 +521,6 @@ Alternatively, if you did not use Generative AI, please include a brief statemen
 
 Since the CES 2021 data is publicly available, describe whether or not this the work completed in your report needs Research Ethics Board approval for the report the be made publicly available. Be sure to specifically discuss the privacy of human participants in this study.-->
 
-Generative AI tools were used to support the organization of this report, help improve the clarity of explanations, and refine the overall quality of writing. AI assistance was also used in a limited way to enhance grammar and suggest alternative phrasing. All analysis, results, and interpretations were completed independently by the authors. While AI can improve efficiency and communication, it also has limitations. Its responses may contain inaccuracies or lack the critical judgment required for academic work. To ensure reliability, all AI-assisted content was carefully reviewed, cross-checked with course materials, and revised to reflect the authors’ own understanding.
 
 # 8 Bibliography
 
