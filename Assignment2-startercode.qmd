@@ -330,16 +330,16 @@ To address our research question—estimating the overall popular vote in the ne
 
 Voting intention is a binary outcome (support for a given party vs. not), making logistic regression an appropriate modeling choice because it models probabilities bounded between 0 and 1 and is widely used for categorical dependent variables. Logistic regression also allows us to quantify how demographic factors relate to voting behaviour while enabling prediction for population subgroups.
 
-For the Liberal Party model, we specified: $$logit(P(Y_i=1))=\beta_0+\beta_1(age_i)+\beta_2(prov_i),$$where $Y_i$ indicates whether respondent $i$ intends to vote Liberal (1 = yes, 0 = no), $\beta_0$ is the intercept, and $\beta_1$ and $\beta_2$ represent the effects of age and province, respectively. Parallel logistic regression models were also fit for the Conservative Party and NDP.
+For the Liberal Party model, we specified: $$logit(P(Y_i=1))=\beta_0+\beta_1(age_i)+\beta_2(prov_i)+\beta_3(gender_i)+\beta_4(edu_i),$$where $Y_i$ indicates whether respondent $i$ intends to vote Liberal (1 = yes, 0 = no), $\beta_0$ is the intercept, and $\beta_1$, $\beta_2$, $\beta_3$, and $\beta_4$ represent the effects of age, province, gender, and education respectively. Parallel logistic regression models were also fit for the Conservative Party and NDP.
 
 This model assumes: (1) the relationship between predictors and the log-odds of voting for a party is linear, (2) observations are independent, and (3) all relevant predictors are measured without systematic error. The parameters of interest are the estimated coefficients and the predicted probabilities from each model, which later enter the post-stratification step.
 
 ```{r, include=FALSE}
 
 # Creating the Model
-liberal_model <- glm(vote_liberal ~ age + prov, data = survey_data, family = binomial)
-conservative_model <- glm(vote_conservative ~ age + prov, data = survey_data, family = binomial)
-ndp_model <- glm(vote_ndp ~ age + prov, data = survey_data, family = binomial)
+liberal_model <- glm(vote_liberal ~ age + prov + gender + edu, data = survey_data, family = binomial)
+conservative_model <- glm(vote_conservative ~ age + prov + gender + edu, data = survey_data, family = binomial)
+ndp_model <- glm(vote_ndp ~ age + prov + gender + edu, data = survey_data, family = binomial)
 
 # Model Results (to Report in Results section)
 # summary(model)
@@ -367,6 +367,7 @@ ndp_model <- glm(vote_ndp ~ age + prov, data = survey_data, family = binomial)
 Post-stratification is a statistical technique that adjusts model-based predictions from a survey to the demographic composition of the full population. In simple terms, it addresses the question: “If each demographic group in Canada votes similarly to our survey and according to the census proportions, what would the election outcome appear like?”
 
 Cells were defined by all combinations of age group × province, because both variables are strongly associated with political preference and are available in both the survey and census datasets. Other variables (e.g., education level) were not included because they were either unavailable or inconsistently measured across data sources.
+Cells were defined by all combinations of age × province × gender × education, since all four predictors were included in the logistic models (they are expected to be associated with political preference) and were consistently measured across both the survey and census datasets.
 
 For each demographic cell $i$:
 
@@ -374,7 +375,7 @@ For each demographic cell $i$:
 2.  Multiply that probability by the census count of individuals in the cell ($N_i$).
 3.  Aggregate predictions across all cells to obtain a national estimate.
 
-The post-stratified estimate for the Liberal party is: $$\hat{y}^{PS}=\frac{\sum_iP(Y=1|age_i,prov_i)\cdot N_i}{\sum_iN_i}$$Post-stratification is appropriate here because the survey is not perfectly representative of the Canadian electorate; without adjustment, predictions would be biased toward the survey’s demographic composition. By integrating census counts, we generate estimates that better approximate real-world voting intentions.
+The post-stratified estimate for the Liberal party is: $$\hat{y}^{PS}=\frac{\sum_iP(Y=1|age_i,prov_i,gender_i,edu_i)\cdot N_i}{\sum_iN_i}$$Post-stratification is appropriate here because the survey is not perfectly representative of the Canadian electorate; without adjustment, predictions would be biased toward the survey’s demographic composition. By integrating census counts, we generate estimates that better approximate real-world voting intentions.
 
 # 4 Results
 
