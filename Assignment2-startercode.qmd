@@ -383,18 +383,26 @@ The post-stratified estimate for the Liberal party is: $$\hat{y}^{PS}=\frac{\sum
 
 #model <- lm(vote_liberal ~ age + prov, data=survey_data)
 # ensure factor levels match EXACTLY
-survey_data$age_num <- as.numeric(survey_data$age)
-survey_data$prov_num <- as.numeric(survey_data$prov)
-
-census_data$age_num <- as.numeric(census_data$age)
-census_data$prov_num <- as.numeric(census_data$prov)
+str(survey_data[, c("age", "prov", "gender", "edu")])
 
 # Creating the Model
-liberal_model <- glm(vote_liberal ~ age_num + prov_num, data = survey_data, family = binomial)
+liberal_model <- glm(
+  vote_liberal ~ age + prov + gender + edu,
+  data = survey_data,
+  family = binomial
+)
 
-conservative_model <- glm(vote_conservative ~ age_num + prov_num, data = survey_data, family = binomial)
+conservative_model <- glm(
+  vote_conservative ~ age + prov + gender + edu,
+  data = survey_data,
+  family = binomial
+)
 
-ndp_model <- glm(vote_ndp ~ age_num + prov_num,data = survey_data, family = binomial)
+ndp_model <- glm(
+  vote_ndp ~ age + prov + gender + edu,
+  data = survey_data,
+  family = binomial
+)
 
 # Model Results (to Report in Results section)
 # summary(model)
@@ -420,16 +428,16 @@ ndp_model <- glm(vote_ndp ~ age_num + prov_num,data = survey_data, family = bino
 
 # Build Census Cell Counts
 census_data_counts <- census_data %>%
-group_by(age_num, prov_num) %>%
-summarise(n = n(), .groups = "drop")
+  group_by(age, prov, gender, edu) %>%
+  summarise(n = n(), .groups = "drop")
 
 # Add predicted probabilities for each party using the logistic models
 census_data_counts <- census_data_counts %>%
-mutate(
-  p_liberal = predict(liberal_model, newdata = census_data_counts, type = "response"),
-  p_con = predict(conservative_model, newdata = census_data_counts, type = "response"),
-  p_ndp = predict(ndp_model, newdata = census_data_counts, type = "response")
-)
+  mutate(
+    p_liberal = predict(liberal_model, newdata = census_data_counts, type = "response"),
+    p_con = predict(conservative_model, newdata = census_data_counts, type = "response"),
+    p_ndp = predict(ndp_model, newdata = census_data_counts, type = "response")
+  )
 
 # Remove un-estimable cells (clean and proper)
 census_data_counts <- census_data_counts %>% 
@@ -472,13 +480,15 @@ caption = "Table 1. Post-Stratified Estimates of Popular Vote for Major Canadian
 
 <!-- Include an explanation/interpretation of the visualizations. Make sure to comment on the appropriateness of the assumptions/results. -->
 
-Table 1 presents the post-stratified estimates of the predicted national popular vote for the Liberal Party, Conservative Party, and NDP. These estimates combine the logistic regression predictions with census population totals to approximate how each party would fare if every demographic group voted in proportion to our survey results.
+Table 1 presents the post-stratified national estimates of the popular vote for the Liberal Party, Conservative Party, and NDP. These values result from combining logistic regression predictions with census population totals, producing adjusted estimates that reflect the demographic composition of the Canadian electorate rather than the survey sample alone.
 
-Based on the post-stratified estimates, the predicted popular vote shares are approximately `r results_table$PredictedShare[results_table$Party == "liberal"]`% for the Liberal Party, `r results_table$PredictedShare[results_table$Party == "conservative"]`% for the Conservative Party, and `r results_table$PredictedShare[results_table$Party == "ndp"]`% for the NDP. These results suggest that the race is competitive, with no single party dominating support nationally.
+Based on the post-stratified results, the predicted popular vote shares are approximately r results_table$PredictedShare[results_table$Party == "liberal"]% for the Liberal Party, r results_table$PredictedShare[results_table$Party == "conservative"]% for the Conservative Party, and r results_table$PredictedShare[results_table$Party == "ndp"]% for the NDP. These estimates indicate that the Liberal Party holds the largest share of predicted support, while the Conservative Party and NDP follow with lower but broadly comparable levels of support. Although the Liberal Party appears to lead, the overall distribution does not reflect a dominant advantage for any one party.
 
-The pattern of predicted vote shares also aligns with expectations from historical Canadian federal elections, where the Liberal and Conservative parties typically receive the highest support, followed by the NDP. Therefore, the results appear reasonable given known voting trends and demographic patterns. However, the true uncertainty of these estimates cannot be fully quantified here because confidence intervals and standard errors were not computed; future work could incorporate bootstrapping or Bayesian post-stratification to quantify variability.
+The predicted pattern aligns reasonably well with historical trends in Canadian federal elections, where the Liberal and Conservative parties typically capture the largest portions of the popular vote, followed by the NDP. Given that the survey sample was not fully representative across key demographic groups, the post-stratified estimates likely provide a more credible approximation of national voting tendencies compared with the raw survey proportions.
 
-Overall, the results indicate that demographic composition plays an important role in estimating election outcomes, reinforcing the value of post-stratification when survey samples are not fully representative of the voting population.
+However, these estimates do not incorporate measures of uncertainty, such as confidence intervals or standard errors. As a result, the true variability around these predictions remains unknown. Future work could account for sampling and model-based uncertainty by implementing resampling techniques (e.g., bootstrapping) or using Bayesian hierarchical post-stratification to quantify the range of plausible outcomes.
+
+Overall, the results underscore the importance of demographic adjustment when analyzing survey-based election forecasts. By incorporating census population counts, post-stratification helps ensure that predicted vote shares better reflect the structure of the Canadian electorate, mitigating biases introduced by uneven sample composition.
 
 <!-- edit the above text -->
 
