@@ -432,7 +432,7 @@ poststrat_results <- census_data_counts %>%
 summarise(
   Liberal = sum(p_liberal * n) / sum(n),
   Conservative = sum(p_con * n) / sum(n),
-  Ndp = sum(p_ndp * n) / sum(n)
+  NDP = sum(p_ndp * n) / sum(n)
 ) 
 
 
