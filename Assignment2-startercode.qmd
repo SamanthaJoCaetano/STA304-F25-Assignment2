@@ -438,12 +438,6 @@ summarise(
 
 ```
 
-Here you present your results. You may want to put them into a well formatted table. Be sure that there is some text describing the results.
-
-Note: Alternatively you can use the `knitr::kable` function to create a well formatted table from your code. See here: <https://rmarkdown.rstudio.com/lesson-7.html>.
-
-Remember you can use `r` to use inline R code.
-
 ```{r, echo = FALSE}
 
 # Here you can include some relevant visualizations.
